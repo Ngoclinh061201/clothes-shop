@@ -38,7 +38,7 @@
                             <label for="image" class=" form-control-label">Content</label>
                         </div>
                         <div class="col-12 col-md-9">
-                            <textarea id="myeditorinstance" name = "content">{{$post->content}}</textarea>
+                            <textarea id="myeditorinstance" name="content_post">{{$post->content}}</textarea>
                         </div>
                     </div>
                 </div>

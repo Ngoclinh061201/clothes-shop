@@ -58,6 +58,7 @@ Route::resource('category', CategoryController::class)->middleware(['auth']);
 Route::resource('slide', SlideController::class)->middleware(['auth']);
 Route::resource('product', ProductController::class)->middleware(['auth']);
 Route::resource('post', PostController::class)->middleware(['auth']);
+
 route::prefix('about-us')->group(function () {
     Route::get('/', [AboutUController::class, 'index']);
     Route::get('create', [AboutUController::class, 'create']);
@@ -67,6 +68,7 @@ route::prefix('about-us')->group(function () {
     Route::get('/{id}/delete', [AboutUController::class, 'destroy']);
 });
 
+Route::resource('bill-admin', App\Http\Controllers\Admin\BillController::class)->middleware(['auth']);
 
 
 Route::get('test-email', [HomeController::class, 'testEmail']);

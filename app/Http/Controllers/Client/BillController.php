@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 use App\Models\City;
 use App\Models\District;
 use Illuminate\Support\Facades\DB;
+use Exception;
 class BillController extends Controller
 {
 
@@ -70,38 +71,40 @@ class BillController extends Controller
     }
 
     public function placeOrder(Request $request){
-        $bill = new Bills();
-        $billDetail = new BillDetail();
-        $totalPrice = 0;
-        $dataCart = $request->session()->all()['cart'][Auth::id()];
-        foreach ($dataCart as $value)
-        {
-            $totalPrice += (!empty($value['price_sale'])) ? $value['price_sale'] : $value['price'];
-            $totalPrice *= $value['quantity'];
-        }
-//  save bill
-        $idBill = uniqid('',true);
-        $bill->id = $idBill;
-        $bill->user_order_id = Auth::id();
-        $bill->recipient_name = $request->full_name;
-        $bill->city_id = $request->code_city;
-        $bill->district_id = $request->district;
-        $bill->number_phone = $request->number_phone;
-        $bill->price = $totalPrice;
-        $bill->address_detail = $request->address_detail;
-        $bill->save();
+        try {
+            $bill = new Bills();
+            $totalPrice = 0;
+            $dataCart = $request->session()->all()['cart'][Auth::id()];
+            foreach ($dataCart as $value){
+                $totalPrice += (!empty($value['price_sale'])) ? $value['price_sale'] : $value['price'];
+                $totalPrice *= $value['quantity'];
+            }
+//        save bill
+            $idBill = uniqid('',true);
+            $bill->id = $idBill;
+            $bill->user_order_id = Auth::id();
+            $bill->recipient_name = $request->full_name;
+            $bill->city_id = $request->code_city;
+            $bill->district_id = $request->district;
+            $bill->number_phone = $request->number_phone;
+            $bill->price = $totalPrice;
+            $bill->address_detail = $request->address_detail;
+            $bill->save();
 //        save bill detail
-        $dataInsert = [];
-        foreach ($dataCart as $key => $value)
-        {
-            $dataInsert[$key]['id'] = uniqid('',true);
-            $dataInsert[$key]['product_id'] = $value['id'];
-            $dataInsert[$key]['bill_id'] = $idBill;
-            $dataInsert[$key]['size'] = "{$value['size']}";
-            $dataInsert[$key]['quantity'] = $value['quantity'];
+            $dataInsert = [];
+            foreach ($dataCart as $key => $value){
+                $dataInsert[$key]['id'] = uniqid('',true);
+                $dataInsert[$key]['product_id'] = $value['id'];
+                $dataInsert[$key]['bill_id'] = $idBill;
+                $dataInsert[$key]['size'] = "{$value['size']}";
+                $dataInsert[$key]['quantity'] = $value['quantity'];
+            }
+            DB::table('bill_detail')->insert($dataInsert);
+            return response()->json('true');
+        } catch(Exception $e) { //catch exception
+            return response()->json('false');
+
         }
-        DB::table('bill_detail')->insert($dataInsert);
-        return response()->json('true');
     }
 
 }

@@ -34,6 +34,10 @@
                 <li>
                     <a href="{{url('about-us')}}"><i class="fas fa-tachometer-alt"></i>About us</a>
                 </li>
+                <li>
+                    <a href="{{url('bill-admin')}}"><i class="fas fa-hand-lizard-o"></i>List order</a>
+
+                </li>
             </ul>
         </nav>
     </div>

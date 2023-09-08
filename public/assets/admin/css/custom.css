@@ -23,3 +23,14 @@
 .sufee-alert{
     display: none;
 }
+table {
+    overflow-x: scroll;
+}
+.filter-year{
+    width: 10rem;
+    text-align: center;
+}
+
+.report-dashboard{
+    margin: 2rem 0rem 2rem 2rem;
+}

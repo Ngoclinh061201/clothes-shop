@@ -56,7 +56,7 @@ class PostController extends Controller
         $post = new Post();
         $post->name = $request->name;
         $post->slug = $request->slug;
-        $post->content = $request->content;
+        $post->content = $request->content_post;
         $post->user_id = Auth::user()->id;
         $post->view = 0;
         if ($request->hasFile('image')) {
@@ -108,7 +108,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->name = $request->name;
         $post->slug = $request->slug;
-        $post->content = $request->content;
+        $post->content = $request->content_post;
         if($request->hasFile('image')){
             $path = 'assets/uploads/post/' . $post->image;
             if(File::exists($path)){
