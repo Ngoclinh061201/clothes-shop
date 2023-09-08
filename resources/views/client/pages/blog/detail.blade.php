@@ -34,7 +34,7 @@
 						</ul>
 					</div>
 					<div class="post-content post-excerpt">
-                        {!! nl2br($data['blog']->content) !!}
+                        {!!( $data['blog']->content) !!}
 				    </div>
 				    <div class="post-social-share">
 				        <h3 class="post-sub-heading">Share this post</h3>
@@ -44,7 +44,7 @@
 							</ul>
 				        </div>
 				    </div>
-				</div>
+				</div> 
 
 			</div>
 		</div>

@@ -30,6 +30,11 @@
                     <a href="{{url('post')}}"><i class="fas fa-calendar-minus"></i>Post</a>
                 </li>
             </ul>
+            <ul class="list-unstyled navbar__list">
+                <li>
+                    <a href="{{url('about-us')}}"><i class="fas fa-tachometer-alt"></i>About us</a>
+                </li>
+            </ul>
         </nav>
     </div>
 </aside>

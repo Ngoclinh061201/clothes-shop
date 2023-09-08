@@ -23,6 +23,8 @@ class PostController extends Controller
             $post = DB::table('post')
                 ->where('name', 'like', '%'.$request->search.'%')
                 ->simplePaginate(10);
+               
+                
         }
         else{
             $post = DB::table('post')->simplePaginate(10);
@@ -87,6 +89,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+       dd ($post);
         return view('admin.pages.post.edit', compact('post'));
     }
 

@@ -43,6 +43,9 @@
                     <!-- Home -->
                     <li class="dropdown ">
                         <a href="{{url('blog')}}">Blog</a>
+                    </li>
+                    <li class="dropdown ">
+                        <a href="{{url('introduce')}}">About us</a>
                     </li><!-- / Home -->
                 </ul><!-- / .nav .navbar-nav -->
 

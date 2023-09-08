@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use App\Models\City;
 use App\Models\District;
-use DB;
+use Illuminate\Support\Facades\DB;
 class BillController extends Controller
 {
 
@@ -74,11 +74,12 @@ class BillController extends Controller
         $billDetail = new BillDetail();
         $totalPrice = 0;
         $dataCart = $request->session()->all()['cart'][Auth::id()];
-        foreach ($dataCart as $value){
+        foreach ($dataCart as $value)
+        {
             $totalPrice += (!empty($value['price_sale'])) ? $value['price_sale'] : $value['price'];
             $totalPrice *= $value['quantity'];
         }
-//        save bill
+//  save bill
         $idBill = uniqid('',true);
         $bill->id = $idBill;
         $bill->user_order_id = Auth::id();
@@ -91,7 +92,8 @@ class BillController extends Controller
         $bill->save();
 //        save bill detail
         $dataInsert = [];
-        foreach ($dataCart as $key => $value){
+        foreach ($dataCart as $key => $value)
+        {
             $dataInsert[$key]['id'] = uniqid('',true);
             $dataInsert[$key]['product_id'] = $value['id'];
             $dataInsert[$key]['bill_id'] = $idBill;
@@ -101,6 +103,6 @@ class BillController extends Controller
         DB::table('bill_detail')->insert($dataInsert);
         return response()->json('true');
     }
-}
 
+}
 
